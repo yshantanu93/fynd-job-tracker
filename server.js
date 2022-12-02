@@ -13,8 +13,8 @@ import notFoundMiddleware from "./middleware/notFound.js";
 import errorHandlerMiddleware from "./middleware/errorHandler.js";
 import authenticateUser from "./middleware/authenticate.js";
 
-app.use(express.json());
 app.use(history());
+app.use(express.json());
 app.use(express.static("./frontend/dist"));
 
 app.use("/api/v1/auth", authRouter);

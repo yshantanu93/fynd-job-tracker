@@ -13,7 +13,7 @@
       <div class="btn-container">
         <button class="btn" @click.prevent="toggleDropdown">
           <font-awesome-icon icon="circle-user" />
-          User
+          {{ userName }}
           <font-awesome-icon icon="caret-down" />
         </button>
         <template v-if="isDropdown">
@@ -41,11 +41,22 @@ export default {
   components: {
     logo: Logo,
   },
+  computed: {
+    ...mapGetters(["getUser"]),
+  },
   methods: {
     ...mapActions(["toggleSidebar", "logoutUser"]),
     toggleDropdown() {
       this.isDropdown = !this.isDropdown;
     },
+  },
+  created() {
+    const userData = JSON.parse(this.getUser);
+    this.userName = userData.name;
+  },
+  mounted() {
+    const userData = JSON.parse(this.getUser);
+    this.userName = userData.name;
   },
 };
 </script>
