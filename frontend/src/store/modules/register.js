@@ -12,9 +12,6 @@ const getters = {
   getUser: (state) => {
     return state.user;
   },
-  getUsername: (state) => {
-    return state.user.name;
-  },
   getToken: (state) => {
     return state.token;
   },

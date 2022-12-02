@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import "express-async-errors";
 import mongoose from "mongoose";
+import history from "connect-history-api-fallback";
 
 import authRouter from "./routes/authRoutes.js";
 import jobsRouter from "./routes/jobsRoutes.js";
@@ -12,8 +13,9 @@ import notFoundMiddleware from "./middleware/notFound.js";
 import errorHandlerMiddleware from "./middleware/errorHandler.js";
 import authenticateUser from "./middleware/authenticate.js";
 
-app.use(express.static("./frontend/dist"));
 app.use(express.json());
+app.use(history());
+app.use(express.static("./frontend/dist"));
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/jobs", authenticateUser, jobsRouter);
