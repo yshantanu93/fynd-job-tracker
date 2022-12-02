@@ -13,7 +13,7 @@
       <div class="btn-container">
         <button class="btn" @click.prevent="toggleDropdown">
           <font-awesome-icon icon="circle-user" />
-          {{ userName }}
+          {{ userName || "USER" }}
           <font-awesome-icon icon="caret-down" />
         </button>
         <template v-if="isDropdown">
