@@ -69,9 +69,10 @@ export default {
 }
 
 .content {
-  background: #f3e4ff;
+  background: #fff;
   width: 90vw;
-  height: 95vh;
+  height: 90vh;
+  border-radius: 1rem;
   padding: 4rem 2rem;
   position: relative;
   display: flex;
@@ -89,35 +90,41 @@ export default {
   cursor: pointer;
 }
 .nav-links {
-  padding-top: 4rem;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
 }
 
 .logo {
-  width: 13rem;
+  width: 10rem;
   height: auto;
 }
 
 .icon {
-  font-size: 3rem;
+  font-size: 2rem;
   display: grid;
   place-items: center;
   transition: 0.3s ease-in-out all;
 }
 
-.router-link-exact-active .icon {
+.router-link-exact-active.icon {
+  color: #9a46fa;
+}
+.router-link-exact-active.nav-link {
   color: #9a46fa;
 }
 .nav-link {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.8rem;
   margin: 2rem;
   color: #797979;
-  padding: 1rem;
   text-transform: capitalize;
   transition: 0.3s ease-in-out all;
+  background-color: #ebebeb;
+  padding: 0.75rem 1.3rem;
+  border-radius: 0.5rem;
 }
 .nav-link:hover .icon {
   color: #9a46fa;

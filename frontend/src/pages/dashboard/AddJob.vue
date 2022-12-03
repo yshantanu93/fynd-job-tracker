@@ -81,8 +81,9 @@
           <button
             class="btn btn-block submit-btn"
             @click.prevent="handleSubmit"
+            :disabled="isLoading"
           >
-            submit
+            {{ isLoading ? "Please Wait..." : "Submit" }}
           </button>
           <button class="btn clear-btn" @click.prevent="handleClear">
             clear
@@ -115,6 +116,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      "isLoading",
       "showAlert",
       "editingStatus",
       "getPosition",

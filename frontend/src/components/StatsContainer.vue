@@ -43,7 +43,7 @@ export default {
 .private-container {
   margin-bottom: 5rem;
   display: grid;
-  row-gap: 2rem;
+  row-gap: 1.5rem;
 }
 @media (min-width: 768px) {
   .private-container {

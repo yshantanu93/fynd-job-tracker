@@ -13,7 +13,7 @@
       <div class="btn-container">
         <button class="btn" @click.prevent="toggleDropdown">
           <font-awesome-icon icon="circle-user" />
-          {{ userName || "USER" }}
+          {{ getUserName }}
           <font-awesome-icon icon="caret-down" />
         </button>
         <template v-if="isDropdown">
@@ -34,7 +34,6 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      userName: "",
       isDropdown: false,
     };
   },
@@ -42,21 +41,13 @@ export default {
     logo: Logo,
   },
   computed: {
-    ...mapGetters(["getUser"]),
+    ...mapGetters(["getUserName"]),
   },
   methods: {
     ...mapActions(["toggleSidebar", "logoutUser"]),
     toggleDropdown() {
       this.isDropdown = !this.isDropdown;
     },
-  },
-  created() {
-    const userData = JSON.parse(this.getUser);
-    this.userName = userData.name;
-  },
-  mounted() {
-    const userData = JSON.parse(this.getUser);
-    this.userName = userData.name;
   },
 };
 </script>

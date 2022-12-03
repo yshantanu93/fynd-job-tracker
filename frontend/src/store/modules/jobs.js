@@ -102,16 +102,15 @@ const actions = {
         Authorization: `Bearer ${rootState.register.token}`,
       },
     });
+    dispatch("loadingOn");
     try {
       await authFetch.post("/jobs", payload);
-      dispatch("loadingOn");
       dispatch("displayAlert", {
         showAlert: true,
         alertType: "success",
         alertText: "Job Added Successfully!",
       });
     } catch (error) {
-      console.log(error);
       dispatch("displayAlert", {
         showAlert: true,
         alertType: "danger",
@@ -125,7 +124,7 @@ const actions = {
     commit("SEARCH_JOB", payload);
   },
 
-  async getAllJobs({ commit, rootState, state }) {
+  async getAllJobs({ dispatch, commit, rootState, state }) {
     const { search, searchStatus, searchType, sort } = state;
     let url = `/jobs?status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
     if (search) {
@@ -137,6 +136,7 @@ const actions = {
         Authorization: `Bearer ${rootState.register.token}`,
       },
     });
+    dispatch("loadingOn");
     try {
       const { data } = await authFetch(url);
       const { jobs, totalJobs, numOfPages } = data;
@@ -144,24 +144,37 @@ const actions = {
     } catch (error) {
       console.log(error);
     }
+    dispatch("loadingOff");
   },
 
   startEditJob(context, payload) {
     context.commit("EDIT_JOB", payload);
   },
-  async editJob({ rootState, state }, payload) {
+  async editJob({ dispatch, rootState, state }, payload) {
     const authFetch = axios.create({
       baseURL: "/api/v1",
       headers: {
         Authorization: `Bearer ${rootState.register.token}`,
       },
     });
+    dispatch("loadingOn");
 
     try {
       await authFetch.patch(`/jobs/${state.editJobId}`, payload);
+      dispatch("displayAlert", {
+        showAlert: true,
+        alertType: "success",
+        alertText: "Job Edited Successfully!",
+      });
     } catch (error) {
-      //
+      dispatch("displayAlert", {
+        showAlert: true,
+        alertType: "danger",
+        alertText: error.response.data.msg,
+      });
     }
+    dispatch("loadingOff");
+    dispatch("clearAlert");
   },
   async deleteJob({ dispatch, rootState, state, commit }, payload) {
     commit("EDIT_JOB", payload);

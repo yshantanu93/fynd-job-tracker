@@ -25,6 +25,7 @@ const register = async (req, res, next) => {
     },
     token,
     location: user.location,
+    userName: user.name,
   });
 };
 const login = async (req, res) => {
@@ -43,7 +44,9 @@ const login = async (req, res) => {
   }
   const token = user.createJWT();
   user.password = undefined;
-  res.status(200).json({ user, token, location: user.location });
+  res
+    .status(200)
+    .json({ user, token, location: user.location, userName: user.name });
 };
 const updateUser = async (req, res) => {
   const { email, name, lastName, location } = req.body;
@@ -61,6 +64,7 @@ const updateUser = async (req, res) => {
     user,
     token,
     location: user.location,
+    userName: user.name,
   });
 };
 

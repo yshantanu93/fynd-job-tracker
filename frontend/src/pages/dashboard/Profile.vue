@@ -22,7 +22,11 @@
             <label for="name" class="form-label">location</label>
             <input type="text" v-model="formData.location" class="form-input" />
           </div>
-          <button class="btn btn-block" @click.prevent="handleSubmit">
+          <button
+            class="btn btn-block"
+            @click.prevent="handleSubmit"
+            :disabled="isLoading"
+          >
             {{ isLoading ? "Please Wait..." : "Save Changes" }}
           </button>
         </div>
@@ -54,9 +58,12 @@ export default {
     ...mapGetters(["showAlert", "isLoading"]),
   },
   methods: {
-    ...mapActions(["updateUser", "displayAlert", "clearAlert"]),
+    ...mapActions(["updateUser"]),
     handleSubmit() {
       this.updateUser(this.formData);
+      Object.keys(this.formData).forEach(
+        (value) => (this.formData[value] = "")
+      );
     },
   },
 };
